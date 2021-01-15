@@ -23,7 +23,7 @@ export class RendererService {
     return RendererService.instance;
   }
 
-  private platform: PlatformRef;
+  public platform: PlatformRef;
 
   private staticRoot = document.getElementById('root');
 
@@ -41,6 +41,7 @@ export class RendererService {
     }
     // platform should be set after enableProdMode()
     this.platform = platformBrowserDynamic();
+    this.initAngularBootstrapElement();
   }
 
   /**
@@ -80,7 +81,7 @@ export class RendererService {
     );
   }
 
-  initAngularBootstrapElement() {
+  private initAngularBootstrapElement() {
     // Adds DOM element that angular will use as bootstrap component
     const storybookWrapperElement = document.createElement(
       RendererService.SELECTOR_STORYBOOK_WRAPPER
