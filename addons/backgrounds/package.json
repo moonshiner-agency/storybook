@@ -1,6 +1,6 @@
 {
   "name": "@storybook/addon-backgrounds",
-  "version": "6.1.14",
+  "version": "6.1.14-canvas-wrapper",
   "description": "Switch backgrounds to view components in different settings",
   "keywords": [
     "addon",
@@ -32,12 +32,12 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "@storybook/addons": "6.1.14",
-    "@storybook/api": "6.1.14",
-    "@storybook/client-logger": "6.1.14",
-    "@storybook/components": "6.1.14",
-    "@storybook/core-events": "6.1.14",
-    "@storybook/theming": "6.1.14",
+    "@storybook/addons": "^6.1.14-canvas-wrapper",
+    "@storybook/api": "^6.1.14-canvas-wrapper",
+    "@storybook/client-logger": "^6.1.14-canvas-wrapper",
+    "@storybook/components": "^6.1.14-canvas-wrapper",
+    "@storybook/core-events": "^6.1.14-canvas-wrapper",
+    "@storybook/theming": "^6.1.14-canvas-wrapper",
     "core-js": "^3.0.1",
     "global": "^4.3.2",
     "memoizerific": "^1.11.3",

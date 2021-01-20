@@ -1,6 +1,6 @@
 {
   "name": "@storybook/angular",
-  "version": "6.1.14",
+  "version": "6.1.14-canvas-wrapper",
   "description": "Storybook for Angular: Develop Angular Components in isolation with Hot Reloading.",
   "keywords": [
     "storybook"
@@ -34,9 +34,9 @@
     "prepare": "node ../../scripts/prepare.js"
   },
   "dependencies": {
-    "@storybook/addons": "6.1.14",
-    "@storybook/core": "6.1.14",
-    "@storybook/node-logger": "6.1.14",
+    "@storybook/addons": "^6.1.14-canvas-wrapper",
+    "@storybook/core": "^6.1.14-canvas-wrapper",
+    "@storybook/node-logger": "^6.1.14-canvas-wrapper",
     "@types/webpack-env": "^1.15.3",
     "autoprefixer": "^9.7.6",
     "core-js": "^3.0.1",
