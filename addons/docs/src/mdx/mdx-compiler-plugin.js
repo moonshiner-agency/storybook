@@ -210,7 +210,6 @@ function genStoryExport(ast, context) {
 }
 
 function genCanvasExports(ast, context, canvasExports = {}) {
-  const canvasExports = {};
   for (let i = 0; i < ast.children.length; i += 1) {
     const child = ast.children[i];
     if (child.type === 'JSXElement') {
@@ -226,6 +225,7 @@ function genCanvasExports(ast, context, canvasExports = {}) {
       } else {
         genCanvasExports(child, context, canvasExports);
       }
+    }
   }
   return canvasExports;
 }
