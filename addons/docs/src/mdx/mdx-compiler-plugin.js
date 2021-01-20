@@ -10,6 +10,7 @@ const jsStringEscape = require('js-string-escape');
 const STORY_REGEX = /^<Story[\s>]/;
 const CANVAS_REGEX = /^<(Preview|Canvas)[\s>]/;
 const META_REGEX = /^<Meta[\s>]/;
+const CANVAS_WRAPPER_REGEX = /^<CanvasWrapper[\s>]/;
 const RESERVED = /^(?:do|if|in|for|let|new|try|var|case|else|enum|eval|false|null|this|true|void|with|await|break|catch|class|const|super|throw|while|yield|delete|export|import|public|return|static|switch|typeof|default|extends|finally|package|private|continue|debugger|function|arguments|interface|protected|implements|instanceof)$/;
 
 function getAttr(elt, what) {
@@ -208,20 +209,23 @@ function genStoryExport(ast, context) {
   };
 }
 
-function genCanvasExports(ast, context) {
+function genCanvasExports(ast, context, canvasExports = {}) {
   const canvasExports = {};
   for (let i = 0; i < ast.children.length; i += 1) {
     const child = ast.children[i];
-    if (child.type === 'JSXElement' && child.openingElement.name.name === 'Story') {
-      const storyExport = genStoryExport(child, context);
-      const { code } = generate(child, {});
-      child.value = code;
-      if (storyExport) {
-        Object.assign(canvasExports, storyExport);
-        // eslint-disable-next-line no-param-reassign
-        context.counter += 1;
+    if (child.type === 'JSXElement') {
+      if (child.openingElement.name.name === 'Story') {
+        const storyExport = genStoryExport(child, context);
+        const { code } = generate(child, {});
+        child.value = code;
+        if (storyExport) {
+          Object.assign(canvasExports, storyExport);
+          // eslint-disable-next-line no-param-reassign
+          context.counter += 1;
+        }
+      } else {
+        genCanvasExports(child, context, canvasExports);
       }
-    }
   }
   return canvasExports;
 }
@@ -280,7 +284,7 @@ function getExports(node, counter, options) {
       node.value = code;
       return storyExport && { stories: storyExport };
     }
-    if (CANVAS_REGEX.exec(value)) {
+    if (CANVAS_REGEX.exec(value) || CANVAS_WRAPPER_REGEX.exec(value)) {
       // Canvas/Preview, possibly containing multiple stories
       const ast = parser.parseExpression(value, { plugins: ['jsx'] });
 
