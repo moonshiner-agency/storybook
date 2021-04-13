@@ -1,6 +1,6 @@
 {
   "name": "@storybook/core-events",
-  "version": "6.2.7",
+  "version": "6.2.7-canvas-wrapper",
   "description": "Event names used in storybook core",
   "keywords": [
     "storybook"
